@@ -1327,11 +1327,11 @@
 
             const getTypeBadge = (type) => {
                 switch(type) {
-                    case '工程量': return <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-bold border border-blue-200">{type}</span>;
-                    case '材料': return <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold border border-green-200">{type}</span>;
-                    case '机械': return <span className="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded font-bold border border-orange-200">{type}</span>;
-                    case '劳务': return <span className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded font-bold border border-purple-200">{type}</span>;
-                    default: return <span className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded font-bold border border-gray-200">{type}</span>;
+                    case '工程量': return <span className="inline-flex items-center justify-center min-w-[52px] whitespace-nowrap bg-blue-100 text-blue-800 text-xs px-2.5 py-1 rounded font-bold border border-blue-200">{type}</span>;
+                    case '材料': return <span className="inline-flex items-center justify-center min-w-[52px] whitespace-nowrap bg-green-100 text-green-800 text-xs px-2.5 py-1 rounded font-bold border border-green-200">{type}</span>;
+                    case '机械': return <span className="inline-flex items-center justify-center min-w-[52px] whitespace-nowrap bg-orange-100 text-orange-800 text-xs px-2.5 py-1 rounded font-bold border border-orange-200">{type}</span>;
+                    case '劳务': return <span className="inline-flex items-center justify-center min-w-[52px] whitespace-nowrap bg-purple-100 text-purple-800 text-xs px-2.5 py-1 rounded font-bold border border-purple-200">{type}</span>;
+                    default: return <span className="inline-flex items-center justify-center min-w-[52px] whitespace-nowrap bg-gray-100 text-gray-800 text-xs px-2.5 py-1 rounded font-bold border border-gray-200">{type}</span>;
                 }
             };
 
@@ -1485,7 +1485,7 @@
                                       <thead className="bg-slate-50 text-slate-600 text-sm border-b border-slate-200 shadow-sm">
                                           <tr>
                                               <th className="px-5 py-4 font-bold w-16">层级</th>
-                                              <th className="px-5 py-4 font-bold w-20">分类</th>
+                                              <th className="px-5 py-4 font-bold w-24 min-w-[88px] whitespace-nowrap text-center">分类</th>
                                               <th className="px-5 py-4 font-bold w-56">明细描述</th>
                                               <th className="px-5 py-4 font-bold w-36">实物申报量</th>
                                               <th className="px-5 py-4 font-bold min-w-[250px]">底层凭据/附件 (穿透审计)</th>
@@ -1504,7 +1504,7 @@
                                               return (
                                                   <tr key={item.id} className={`hover:bg-slate-50 transition-colors ${isMain ? 'bg-blue-50/20' : ''}`}>
                                                       <td className={`px-5 py-4 text-slate-700 font-mono ${isMain ? 'font-bold text-base' : 'pl-8'}`}>{item.id}</td>
-                                                      <td className="px-5 py-4">{getTypeBadge(item.type)}</td>
+                                                      <td className="px-5 py-4 whitespace-nowrap text-center align-middle">{getTypeBadge(item.type)}</td>
                                                       <td className={`px-5 py-4 text-slate-800 ${isMain ? 'font-bold text-base' : ''}`}>{item.desc}</td>
                                                       <td className="px-5 py-4 text-slate-800">
                                                           <span className={`font-bold ${isMain && item.qty !== '--' ? 'text-lg text-blue-700' : (item.qty === '--' ? 'text-slate-400' : 'text-slate-800 text-base')}`}>{item.qty}</span> <span className="text-xs text-slate-500 ml-1">{item.unit}</span>
