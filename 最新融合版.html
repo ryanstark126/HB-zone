@@ -183,11 +183,11 @@
         };
 
         const ROLES = [
-          { id: 'owner', name: '业主方 (项目总控)', desc: '控制总投资，终审资料并授权发证', color: 'bg-blue-100 text-blue-800' },
-          { id: 'contractor', name: '承建方 (施工单位)', desc: '提交产值(SOV)，发起资金申报', color: 'bg-orange-100 text-orange-800' },
-          { id: 'consultant', name: '监理与全咨', desc: '现场见证，核定量价，出具支付证书', color: 'bg-purple-100 text-purple-800' },
+          { id: 'owner', name: '建设单位 (项目总控)', desc: '控制总投资，终审资料并授权发证', color: 'bg-blue-100 text-blue-800' },
+          { id: 'contractor', name: '施工单位', desc: '提交产值(SOV)，发起资金申报', color: 'bg-orange-100 text-orange-800' },
+          { id: 'consultant', name: '监理单位', desc: '现场见证，核定量价，出具支付证书', color: 'bg-purple-100 text-purple-800' },
           { id: 'bank', name: '金融机构 (放款银行)', desc: '凭证书接收指令，执行资金划拨', color: 'bg-green-100 text-green-800' },
-          { id: 'regulator', name: '监管方 (政府/住建)', desc: '全局穿透审计，合规与防挪用监控', color: 'bg-slate-200 text-slate-800' },
+          { id: 'regulator', name: '监管机构 (政府/住建)', desc: '全局穿透审计，合规与防挪用监控', color: 'bg-slate-200 text-slate-800' },
         ];
 
         // 重新排序后的 MENU_DATA，符合 规划 -> 执行 -> 结算 -> 支撑 -> 收尾 的全周期逻辑
@@ -1140,8 +1140,8 @@
 
           // --- 模块 2: 通信RFI 状态 ---
           const [rfis, setRfis] = useState([
-              { id: 'RFI-2026-042', status: 'Open', priority: 'High', subject: '关于地下室图纸管线标高严重冲突的紧急澄清', author: '承建方-机电组', date: '2026-05-18', thread: [{ sender: '承建方 (施工单位)', text: '现场开挖后发现实际岩层标高与勘察图纸严重不符，若按原图纸施工将导致主水管无法穿过。由于明天需封模，请求设计与监理紧急给出调整意见。', time: '05-18 09:30', files: ['现场冲突照片_26.jpg'] }] },
-              { id: 'RFI-2026-041', status: 'Closed', priority: 'Normal', subject: '确认大坝C区所用阻锈剂品牌型号', author: '承建方-物资部', date: '2026-05-16', thread: [{ sender: '承建方 (施工单位)', text: '备选阻锈剂品牌有两家，由于价格差异，请业主及监理确认最终采购哪家？', time: '05-16 10:00' }, { sender: '监理与全咨', text: '已和业主确认，选用 A 品牌。此 RFI 状态现已关闭。', time: '05-16 15:30' }] },
+              { id: 'RFI-2026-042', status: 'Open', priority: 'High', subject: '关于地下室图纸管线标高严重冲突的紧急澄清', author: '施工单位-机电组', date: '2026-05-18', thread: [{ sender: '施工单位', text: '现场开挖后发现实际岩层标高与勘察图纸严重不符，若按原图纸施工将导致主水管无法穿过。由于明天需封模，请求设计与监理单位紧急给出调整意见。', time: '05-18 09:30', files: ['现场冲突照片_26.jpg'] }] },
+              { id: 'RFI-2026-041', status: 'Closed', priority: 'Normal', subject: '确认大坝C区所用阻锈剂品牌型号', author: '施工单位-物资部', date: '2026-05-16', thread: [{ sender: '施工单位', text: '备选阻锈剂品牌有两家，由于价格差异，请建设单位及监理单位确认最终采购哪家？', time: '05-16 10:00' }, { sender: '监理单位', text: '已和建设单位确认，选用 A 品牌。此 RFI 状态现已关闭。', time: '05-16 15:30' }] },
           ]);
           const [rfiView, setRfiView] = useState('open');
           const [selectedRfiId, setSelectedRfiId] = useState(null);
@@ -1151,8 +1151,8 @@
 
           // --- 模块 3: 在线签章 状态 ---
           const [signDocs, setSignDocs] = useState([
-              { id: 1, docNo: 'PAY-2026-05', name: '雅下水电站2026年5月进度款支付证书.pdf', requireRole: 'owner', status: 'Pending', icon: Landmark, amount: '¥ 465,000.00', initiator: '监理方 - 王工', hash: '0x8a92...f7b2' },
-              { id: 2, docNo: 'HSE-RPT-088', name: '基坑支护专项安全验收报告.pdf', requireRole: 'consultant', status: 'Pending', icon: ShieldCheck, amount: '-', initiator: '承建方 - 李工', hash: '0x1c4a...e3d9' }
+              { id: 1, docNo: 'PAY-2026-05', name: '雅下水电站2026年5月进度款支付证书.pdf', requireRole: 'owner', status: 'Pending', icon: Landmark, amount: '¥ 465,000.00', initiator: '监理单位 - 王工', hash: '0x8a92...f7b2' },
+              { id: 2, docNo: 'HSE-RPT-088', name: '基坑支护专项安全验收报告.pdf', requireRole: 'consultant', status: 'Pending', icon: ShieldCheck, amount: '-', initiator: '施工单位 - 李工', hash: '0x1c4a...e3d9' }
           ]);
           const [selectedSignId, setSelectedSignId] = useState(null);
           const [isSigning, setIsSigning] = useState(false);
@@ -1178,7 +1178,7 @@
             setTimeout(() => { setToast(null); }, 4500);
           };
 
-          // SOV (承建方)
+          // SOV (施工单位)
           const totalAmount = sovLineItems.reduce((acc, curr) => acc + (curr.total || 0), 0);
 
           const handleExtractConfirm = () => {
@@ -1205,10 +1205,10 @@
               showToast("合同价项映射成功！请点击「启动合规风控自检」扫描验证本次支付合规性。");
           };
 
-          // 查勘 (监理 / 业主)
+          // 查勘 (监理单位 / 建设单位)
           const signSupervisor = () => {
               setSupervisorSignState('signed');
-              showToast('监理与全咨代表已完成现场查勘签认！系统已自动为您切换至【业主方】进行最终查勘确认。');
+              showToast('监理单位代表已完成现场查勘签认！系统已自动为您切换至【建设单位】进行最终查勘确认。');
               setTimeout(() => {
                   setCurrentRole(ROLES.find(r => r.id === 'owner'));
               }, 2000);
@@ -1216,7 +1216,7 @@
 
           const signOwner = () => {
               setOwnerSignState('signed');
-              showToast('业主方代表已完成最终核查并签认，查勘环节圆满结束！\n\n即将自动流转至【进度款联审】环节。');
+              showToast('建设单位代表已完成最终核查并签认，查勘环节圆满结束！\n\n即将自动流转至【进度款联审】环节。');
               setTimeout(() => {
                   setPaymentStatus('consultant_audit');
                   setActiveMenu('joint-approval');
@@ -1224,7 +1224,7 @@
               }, 2500);
           };
 
-          // 联审 (全咨 -> 业主 -> 监理 -> 银行)
+          // 联审 (监理单位 -> 建设单位 -> 监理单位 -> 银行)
           const startAiDeductionScan = () => {
               if (deductState !== 'idle') return;
               setDeductState('scanning');
@@ -1363,7 +1363,7 @@
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[11px] text-slate-500 mb-1">当前节点状态 (Workflow)</span>
-                            <span className={`text-[13px] font-bold ${sovPhase >= 0 ? 'text-orange-600' : 'text-slate-300'}`}>{sovPhase < 0 ? '未启动' : (!isDraft ? '已提交给全咨/监理' : (sovPhase === 3 ? '风控绿灯，待提交' : '草稿填报中 (Draft)'))}</span>
+                            <span className={`text-[13px] font-bold ${sovPhase >= 0 ? 'text-orange-600' : 'text-slate-300'}`}>{sovPhase < 0 ? '未启动' : (!isDraft ? '已提交给监理单位' : (sovPhase === 3 ? '风控绿灯，待提交' : '草稿填报中 (Draft)'))}</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[11px] text-slate-500 mb-1">合同清单总价 (Total BoQ)</span>
@@ -1422,7 +1422,7 @@
                                     setPaymentStatus('field_sign');
                                     setCurrentRole(ROLES.find(r => r.id === 'consultant'));
                                     setActiveMenu('field-inspect');
-                                    showToast('操作成功！产值报表已提交。\n\n系统已自动为您切换至【监理与全咨】，进入现场查勘环节。');
+                                    showToast('操作成功！产值报表已提交。\n\n系统已自动为您切换至【监理单位】，进入现场查勘环节。');
                                 }} className="px-6 py-2 bg-orange-600 text-white hover:bg-orange-700 rounded-md font-bold text-xs shadow-md flex items-center gap-1.5 active:scale-95 animate-pulse ring-2 ring-orange-400 ring-offset-1">
                                     <CheckCircle2 size={14}/> 提交提请查勘与联审
                                 </button>
@@ -1608,12 +1608,12 @@
                   }
               } else if (actualVerifyState === 'verified' && actualSupSign === 'signed' && actualOwnSign === 'pending') {
                   if (currentRole.id === 'owner') {
-                      topBtnText = "签署查勘确认意见 (业主方)";
+                      topBtnText = "签署查勘确认意见 (建设单位)";
                       topBtnAction = signOwner;
                       topBtnIcon = <PenTool size={16}/>;
                       topBtnClass = "bg-blue-600 hover:bg-blue-700 text-white animate-bounce shadow-lg ring-2 ring-blue-300 ring-offset-2";
                   } else {
-                      topBtnText = "等待业主方代表签认...";
+                      topBtnText = "等待建设单位代表签认...";
                       topBtnAction = null;
                       topBtnIcon = <Clock size={16}/>;
                       topBtnClass = "bg-orange-500 hover:bg-orange-600 text-white cursor-wait";
@@ -1727,7 +1727,7 @@
                         <div className="bg-white p-4 rounded border border-purple-100 shadow-sm space-y-4 flex-1">
                             <div>
                                 <div className="flex justify-between items-center mb-1.5">
-                                    <span className="text-xs text-slate-500 font-bold">承建方申报当期完工比例 <span className="ml-1 text-[9px] bg-slate-100 border border-slate-200 px-1 rounded text-slate-400">继承自SOV单</span></span>
+                                    <span className="text-xs text-slate-500 font-bold">施工单位申报当期完工比例 <span className="ml-1 text-[9px] bg-slate-100 border border-slate-200 px-1 rounded text-slate-400">继承自SOV单</span></span>
                                     <span className="text-sm font-black text-slate-800">{declaredPercent}% <span className="text-[10px] font-normal text-slate-400 ml-1">({declaredQtyStr} m³)</span></span>
                                 </div>
                                 <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
@@ -1750,7 +1750,7 @@
                                     <button onClick={() => {
                                         if (currentRole.id !== 'consultant') {
                                             setCurrentRole(ROLES.find(r => r.id === 'consultant'));
-                                            showToast('已为您自动切换至【监理与全咨】身份进行查勘作业。');
+                                            showToast('已为您自动切换至【监理单位】身份进行查勘作业。');
                                         }
                                         setIsBimModalOpen(true);
                                     }} className="mt-4 w-full bg-purple-50 text-purple-600 hover:bg-purple-100 border border-purple-200 py-2 rounded text-xs font-bold transition-colors shadow-sm">
@@ -1766,7 +1766,7 @@
                         <div className="space-y-3">
                             <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg border border-slate-100 transition-colors">
                                 <div className="flex flex-col">
-                                    <span className="text-sm font-bold text-slate-700">监理与全咨代表</span>
+                                    <span className="text-sm font-bold text-slate-700">监理单位代表</span>
                                     <span className="text-[10px] text-slate-400 mt-0.5">确认实物量与申报单匹配</span>
                                 </div>
                                 {actualSupSign === 'signed' ? (
@@ -1780,7 +1780,7 @@
 
                             <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg border border-slate-100 transition-colors">
                                 <div className="flex flex-col">
-                                    <span className="text-sm font-bold text-slate-700">业主方现场代表</span>
+                                    <span className="text-sm font-bold text-slate-700">建设单位现场代表</span>
                                     <span className="text-[10px] text-slate-400 mt-0.5">核对查勘记录无误</span>
                                 </div>
                                 {actualOwnSign === 'signed' ? (
@@ -1804,9 +1804,9 @@
               const steps = [
                 { id: 'draft', title: '施工报产值' },
                 { id: 'field_sign', title: '现场查勘签认' },
-                { id: 'consultant_audit', title: '全咨造价联审' },
-                { id: 'owner_review', title: '业主审定授权' },
-                { id: 'consultant_cert', title: '监理签发证书' },
+                { id: 'consultant_audit', title: '监理单位造价联审' },
+                { id: 'owner_review', title: '建设单位审定授权' },
+                { id: 'consultant_cert', title: '监理单位签发证书' },
                 { id: 'bank_execute', title: '专户穿透拨付' }
               ];
               const currentIndex = steps.findIndex(s => s.id === paymentStatus) === -1 ? 6 : steps.findIndex(s => s.id === paymentStatus);
@@ -1839,7 +1839,7 @@
                   <div>
                       <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2"><FileCheck2 className="text-blue-600" size={24}/> 进度款联审与造价复核</h2>
                       <p className="text-xs text-slate-500 mt-1">
-                          操作流：AI筛查扣款 &rarr; 确认扣款明细 &rarr; 触发业财安全校验 &rarr; AI生成初审草案 &rarr; 提交业主审批
+                          操作流：AI筛查扣款 &rarr; 确认扣款明细 &rarr; 触发业财安全校验 &rarr; AI生成初审草案 &rarr; 提交建设单位审批
                       </p>
                   </div>
                   <div className="hidden md:flex items-center gap-2 text-xs font-bold text-slate-500 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-sm">
@@ -1902,7 +1902,7 @@
                                     <ArrowDownRight size={16} /> 应扣及代扣项核定 (Deductions)
                                 </h3>
                                 {actualDeductState === 'confirmed' ? (
-                                    <span className="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 border border-emerald-200 rounded font-bold flex items-center gap-1"><CheckCircle2 size={12}/> 全咨确认无误</span>
+                                    <span className="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 border border-emerald-200 rounded font-bold flex items-center gap-1"><CheckCircle2 size={12}/> 监理单位确认无误</span>
                                 ) : actualDeductState === 'listed' ? (
                                     <span className="text-[10px] text-blue-600 bg-blue-100 px-2 py-0.5 border border-blue-200 rounded font-bold">待造价师核认</span>
                                 ) : (
@@ -2129,11 +2129,11 @@
                                                 onClick={() => {
                                                     setPaymentStatus('owner_review'); 
                                                     setCurrentRole(ROLES.find(r => r.id === 'owner'));
-                                                    showToast('核价与联审完成！已自动为您切换至【业主方】，请进行最终审定授权。');
+                                                    showToast('核价与联审完成！已自动为您切换至【建设单位】，请进行最终审定授权。');
                                                 }} 
                                                 className={`w-full py-3.5 rounded-lg font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 ${!isCanSubmit ? 'bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300' : 'bg-blue-600 text-white hover:bg-blue-700 active:scale-95 animate-pulse ring-4 ring-blue-100'}`}
                                             >
-                                                <SendToBack size={16}/> 确认核定金额并提交业主审批
+                                                <SendToBack size={16}/> 确认核定金额并提交建设单位审批
                                             </button>
                                         </div>
                                     </div>
@@ -2141,19 +2141,19 @@
 
                                 {currentRole.id === 'owner' && paymentStatus === 'owner_review' && (
                                     <div className="mt-auto pt-4 border-t border-slate-100">
-                                        <h4 className="font-bold text-blue-900 mb-1 text-sm">业主审定授权</h4>
-                                        <p className="text-[10px] text-slate-600 mb-3">确认产值、质量罚款均符合合同约定。审定通过后将由监理方出具支付证书。</p>
+                                        <h4 className="font-bold text-blue-900 mb-1 text-sm">建设单位审定授权</h4>
+                                        <p className="text-[10px] text-slate-600 mb-3">确认产值、质量罚款均符合合同约定。审定通过后将由监理单位出具支付证书。</p>
                                         <button onClick={() => { 
                                             setPaymentStatus('consultant_cert'); 
                                             setCurrentRole(ROLES.find(r => r.id === 'consultant'));
-                                            showToast('业主审定通过！已自动为您切换至【监理】进行最后发证。'); 
+                                            showToast('建设单位审定通过！已自动为您切换至【监理单位】进行最后发证。');
                                         }} className="w-full bg-blue-600 text-white py-2.5 rounded-md font-bold text-sm shadow hover:bg-blue-700 transition-all active:scale-95">审定结论通过并授权</button>
                                     </div>
                                 )}
                                 {currentRole.id === 'consultant' && paymentStatus === 'consultant_cert' && (
                                     <div className="mt-auto pt-4 border-t border-slate-100">
                                         <h4 className="font-bold text-purple-900 mb-1 text-sm">签发工程款支付证书</h4>
-                                        <p className="text-[10px] text-slate-600 mb-3">业主已授权。此证书将作为银行专户划拨的法定依据。</p>
+                                        <p className="text-[10px] text-slate-600 mb-3">建设单位已授权。此证书将作为银行专户划拨的法定依据。</p>
                                         <button onClick={() => { 
                                             setPaymentStatus('bank_execute'); 
                                             setCurrentRole(ROLES.find(r => r.id === 'bank'));
@@ -2197,7 +2197,7 @@
                                             setSovPhase(-1); setInspectVerifyState('pending'); setSupervisorSignState('pending'); setOwnerSignState('pending');
                                             setActiveMenu('sov-manage'); setExpandedMenus(['contract']);
                                             setCurrentRole(ROLES.find(r => r.id === 'contractor'));
-                                            showToast('系统已重置！现已为您切换至【承建方】身份，请重新体验产值报审。');
+                                            showToast('系统已重置！现已为您切换至【施工单位】身份，请重新体验产值报审。');
                                         }} className="mt-4 px-4 py-1.5 rounded-md bg-slate-100 text-xs text-blue-600 font-bold hover:bg-blue-50 transition-colors border border-slate-200">
                                             重置体验全流程 (至起点)
                                         </button>
@@ -2207,7 +2207,7 @@
                             
                             <div className="bg-[#1e293b] p-6 rounded-b-lg text-white flex flex-col justify-center items-center shadow-inner relative overflow-hidden mt-auto shrink-0 z-0 border-t-4 border-blue-500">
                                 <div className="absolute top-0 right-0 p-2 opacity-5"><Calculator size={64}/></div>
-                                <span className="text-[11px] uppercase tracking-widest font-bold text-slate-400 mb-1.5 z-10">全咨建议拨付净额 (Net Payment)</span>
+                                <span className="text-[11px] uppercase tracking-widest font-bold text-slate-400 mb-1.5 z-10">监理单位建议拨付净额 (Net Payment)</span>
                                 <span className="font-mono text-4xl font-black tracking-tighter z-10 text-white drop-shadow-md">¥ {(totalAmount * 10000 - 150000).toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
                                 <span className="text-[10px] bg-slate-800 text-slate-300 px-3 py-1 rounded-full mt-3 z-10 border border-slate-600 font-mono">{totalAmount * 10000} (本期产值) - 150,000 (应扣款)</span>
                             </div>
@@ -2273,8 +2273,8 @@
               const getStatusBadge = (phase, reviewCode) => {
                   switch(phase) {
                       case 0: return <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold border border-slate-200">内部起草 (Draft)</span>;
-                      case 1: return <span className="text-[10px] bg-orange-100 text-orange-700 px-2 py-0.5 rounded font-bold border border-orange-200 flex items-center gap-1 w-max"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></div>全咨审查中</span>;
-                      case 2: return <span className="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold border border-blue-200 flex items-center gap-1 w-max"><div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></div>业主定板确认</span>;
+                      case 1: return <span className="text-[10px] bg-orange-100 text-orange-700 px-2 py-0.5 rounded font-bold border border-orange-200 flex items-center gap-1 w-max"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></div>监理单位审查中</span>;
+                      case 2: return <span className="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold border border-blue-200 flex items-center gap-1 w-max"><div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></div>建设单位定板确认</span>;
                       case 3: return <span className="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-bold border border-emerald-200 flex items-center gap-1 w-max"><Lock size={10}/>归档发布 ({reviewCode || 'Code A'})</span>;
                       case 4: return <span className="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold border border-red-200 w-max">退回修改 (Code C)</span>;
                       default: return null;
@@ -2443,30 +2443,30 @@
                                                     
                                                     <div className="relative pl-6">
                                                         <FlowNode 
-                                                            title="1. 内部起草与发版分发" desc={selectedDoc.phase > 0 ? "文档已打包提交至正式审阅流。" : "草稿状态，请确认无误后发送 Transmittal单。"} role="承建方 (施工单位)" status={selectedDoc.phase >= 1 ? 'done' : 'active'}
+                                                            title="1. 内部起草与发版分发" desc={selectedDoc.phase > 0 ? "文档已打包提交至正式审阅流。" : "草稿状态，请确认无误后发送 Transmittal单。"} role="施工单位" status={selectedDoc.phase >= 1 ? 'done' : 'active'}
                                                             actionBtn={
                                                                 selectedDoc.phase === 0 ? (
                                                                     currentRole.id === 'contractor' ? (
-                                                                        <button onClick={() => handlePhaseAction(1, "分发流转单已创建，已发往监理方审查。", null)} className="w-full bg-blue-600 text-white text-sm font-bold py-3 rounded-lg shadow-md hover:bg-blue-700 active:scale-95 flex items-center justify-center gap-2 transition-all">
+                                                                        <button onClick={() => handlePhaseAction(1, "分发流转单已创建，已发往监理单位审查。", null)} className="w-full bg-blue-600 text-white text-sm font-bold py-3 rounded-lg shadow-md hover:bg-blue-700 active:scale-95 flex items-center justify-center gap-2 transition-all">
                                                                             {approvalActionState === 'approving' ? <RefreshCw size={16} className="animate-spin"/> : <SendToBack size={16}/>} 发送流转分发单 (Transmit)
                                                                         </button>
-                                                                    ) : (<div className="text-center text-xs text-orange-600 bg-orange-50 py-2 rounded font-bold border border-orange-200">当前步骤由【承建方】执行</div>)
+                                                                    ) : (<div className="text-center text-xs text-orange-600 bg-orange-50 py-2 rounded font-bold border border-orange-200">当前步骤由【施工单位】执行</div>)
                                                                 ) : null
                                                             }
                                                         />
                                                         <FlowNode 
-                                                            title="2. 全咨合规技术审查" desc={selectedDoc.phase > 1 ? "已完成专业审查，并分配了审查代码。" : (selectedDoc.phase === 1 ? "请严格分配 Aconex 标准 Review Code。" : "")} role="监理与全咨" status={selectedDoc.phase >= 2 ? 'done' : selectedDoc.phase === 4 ? 'reject' : (selectedDoc.phase === 1 ? 'active' : 'wait')}
+                                                            title="2. 监理单位合规技术审查" desc={selectedDoc.phase > 1 ? "已完成专业审查，并分配了审查代码。" : (selectedDoc.phase === 1 ? "请严格分配 Aconex 标准 Review Code。" : "")} role="监理单位" status={selectedDoc.phase >= 2 ? 'done' : selectedDoc.phase === 4 ? 'reject' : (selectedDoc.phase === 1 ? 'active' : 'wait')}
                                                             actionBtn={
                                                                 selectedDoc.phase === 1 ? (
                                                                     currentRole.id === 'consultant' ? (
                                                                         <div className="flex flex-col gap-3">
                                                                             <div className="flex gap-3">
-                                                                                <button onClick={() => handlePhaseAction(2, "已分配 Code B，并流转至业主终审。", 'Code B')} className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold py-3 rounded-lg shadow-md transition-all active:scale-95 flex items-center justify-center gap-2"><CheckCircle2 size={16}/> 批准 (Code A/B)</button>
-                                                                                <button onClick={() => handlePhaseAction(4, "已分配 Code C，要求施工方修改重提。", 'Code C')} className="flex-1 bg-white border border-red-200 text-red-600 hover:bg-red-50 text-sm font-bold py-3 rounded-lg shadow-sm transition-all active:scale-95 flex items-center justify-center gap-2"><XCircle size={16}/> 驳回 (Code C)</button>
+                                                                                <button onClick={() => handlePhaseAction(2, "已分配 Code B，并流转至建设单位终审。", 'Code B')} className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold py-3 rounded-lg shadow-md transition-all active:scale-95 flex items-center justify-center gap-2"><CheckCircle2 size={16}/> 批准 (Code A/B)</button>
+                                                                                <button onClick={() => handlePhaseAction(4, "已分配 Code C，要求施工单位修改重提。", 'Code C')} className="flex-1 bg-white border border-red-200 text-red-600 hover:bg-red-50 text-sm font-bold py-3 rounded-lg shadow-sm transition-all active:scale-95 flex items-center justify-center gap-2"><XCircle size={16}/> 驳回 (Code C)</button>
                                                                             </div>
                                                                             {approvalActionState === 'approving' && <div className="text-xs text-blue-600 bg-blue-50 p-2.5 rounded border border-blue-100 flex items-center justify-center gap-2"><RefreshCw size={14} className="animate-spin"/> 正在加盖个人电子签章并流转...</div>}
                                                                         </div>
-                                                                    ) : (<div className="text-center text-xs text-orange-600 bg-orange-50 py-2 rounded font-bold border border-orange-200">当前步骤由【监理与全咨】执行</div>)
+                                                                    ) : (<div className="text-center text-xs text-orange-600 bg-orange-50 py-2 rounded font-bold border border-orange-200">当前步骤由【监理单位】执行</div>)
                                                                 ) : selectedDoc.phase === 4 ? (
                                                                     <div className="flex flex-col gap-4">
                                                                         <div className="text-xs text-red-600 bg-red-50 p-3 rounded-lg border border-red-200 shadow-inner leading-relaxed"><span className="font-bold flex items-center gap-1.5 mb-1"><AlertTriangle size={14}/> 驳回意见：</span>图纸或模型存在碰撞冲突，请修改并升级版本(Rev)后重新提交。</div>
@@ -2480,14 +2480,14 @@
                                                             }
                                                         />
                                                         <FlowNode 
-                                                            title="3. 业主方最终定板授权" desc={selectedDoc.phase > 2 ? "业主代表已审定，文档正式生效受控。" : (selectedDoc.phase === 2 ? "请基于监理意见进行最终确认签批。" : "")} role="业主方 (项目总控)" status={selectedDoc.phase >= 3 ? 'done' : (selectedDoc.phase === 2 ? 'active' : 'wait')}
+                                                            title="3. 建设单位最终定板授权" desc={selectedDoc.phase > 2 ? "建设单位代表已审定，文档正式生效受控。" : (selectedDoc.phase === 2 ? "请基于监理单位意见进行最终确认签批。" : "")} role="建设单位 (项目总控)" status={selectedDoc.phase >= 3 ? 'done' : (selectedDoc.phase === 2 ? 'active' : 'wait')}
                                                             actionBtn={
                                                                 selectedDoc.phase === 2 ? (
                                                                     currentRole.id === 'owner' ? (
                                                                         <button onClick={() => handlePhaseAction(3, "定板成功，文件已触发哈希上链并归入公共库！", 'Code A')} className="w-full bg-blue-600 text-white text-xs font-bold py-2.5 rounded shadow-md hover:bg-blue-700 active:scale-95 flex items-center justify-center gap-1.5 transition-all">
                                                                             {approvalActionState === 'approving' ? <RefreshCw size={14} className="animate-spin"/> : <Stamp size={14}/>} 签批发布 (Approve & Publish)
                                                                         </button>
-                                                                    ) : (<div className="text-center text-[10px] text-orange-600 bg-orange-50 py-1.5 rounded font-bold border border-orange-200">当前步骤由【业主方】执行</div>)
+                                                                    ) : (<div className="text-center text-[10px] text-orange-600 bg-orange-50 py-1.5 rounded font-bold border border-orange-200">当前步骤由【建设单位】执行</div>)
                                                                 ) : null
                                                             }
                                                         />
@@ -2557,7 +2557,7 @@
               const triggerAiReply = () => {
                   setAiReplying(true);
                   setTimeout(() => {
-                      setRfiReplyText('已收到现场反馈。经设计复核，同意将该区段引水管线标高整体下调 150mm 以避开岩层。请施工方根据调整后的标高先行施工，后续我们将补发正式的设计变更指令单(SI)作为计量依据。');
+                      setRfiReplyText('已收到现场反馈。经设计复核，同意将该区段引水管线标高整体下调 150mm 以避开岩层。请施工单位根据调整后的标高先行施工，后续我们将补发正式的设计变更指令单(SI)作为计量依据。');
                       setAiReplying(false);
                   }, 1200);
               }
@@ -2700,10 +2700,10 @@
           // ================= Render 3: 变更溯源 =================
           const renderChangeTrace = () => {
               const changeChain = [
-                  { type: 'RFI', docNo: 'RFI-2026-042', title: '地下室管线标高冲突疑问', owner: '承建方 (发起)', status: '已关闭', date: '05-18' },
-                  { type: 'SI', docNo: 'SI-015', title: '设计标高现场调整指令单', owner: '全咨设计部 (下达)', status: '已执行', date: '05-19' },
-                  { type: 'Quote', docNo: 'QUO-008', title: '管线绕排工程量增项报价', owner: '承建方 (估价)', status: '待审批', date: '05-20' },
-                  { type: 'VO', docNo: 'VO-003', title: '第3号工程变更与签证 (VO)', owner: '业主方 (终审)', status: '未生成', date: '-' }
+                  { type: 'RFI', docNo: 'RFI-2026-042', title: '地下室管线标高冲突疑问', owner: '施工单位 (发起)', status: '已关闭', date: '05-18' },
+                  { type: 'SI', docNo: 'SI-015', title: '设计标高现场调整指令单', owner: '监理单位设计部 (下达)', status: '已执行', date: '05-19' },
+                  { type: 'Quote', docNo: 'QUO-008', title: '管线绕排工程量增项报价', owner: '施工单位 (估价)', status: '待审批', date: '05-20' },
+                  { type: 'VO', docNo: 'VO-003', title: '第3号工程变更与签证 (VO)', owner: '建设单位 (终审)', status: '未生成', date: '-' }
               ];
 
               return (
